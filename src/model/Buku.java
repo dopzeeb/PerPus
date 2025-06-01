@@ -43,9 +43,10 @@ public class Buku {
     public void setIsFiksi(Boolean isFiksi) {
         this.isFiksi = isFiksi;
     }
-    public void printBuku(){
+    public void printBuku() {
         System.out.println("ID = " + getId_buku);
         System.out.println("Judul = " + getJudul);
         System.out.println("Penulis = " + getPenulis);
         System.out.println("Fiksi/Non-fiksi = " + getIsFiksi);
+    }
 }
