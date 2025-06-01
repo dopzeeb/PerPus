@@ -7,11 +7,18 @@ public abstract class user {
     private String alamat;
     private String noTelp;
 
-    public user(Integer id, String nama){
-        this.id = id;
-        this.nama = nama;
+    public user() {
+        this.id = 0;
+        this.nama = "";
         this.alamat = "";
         this.noTelp = "";
+    }
+    
+    public user(Integer id, String nama, String alamat, String noTelp) {
+        this.id = id;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.noTelp = noTelp;
     }
 
     public abstract void showRole();
