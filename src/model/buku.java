@@ -1,8 +1,8 @@
 package model;
 
 public class Buku {
-    private String judul;
     private Integer id_buku;
+    private String judul;
     private String penulis;
     private Boolean isFiksi;
     
