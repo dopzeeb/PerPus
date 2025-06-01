@@ -7,12 +7,14 @@ public class Buku {
     private Boolean isFiksi;
     
     public Buku() {
+        this.id_buku = 0;
         this.judul = "";
         this.penulis = "";
         this.isFiksi = false;
     }
     
     public Buku(String judul, Integer id_buku, String penulis,Boolean isFiksi) {
+        this.id_buku = id_buku;
         this.judul = judul;
         this.penulis = penulis;
         this.isFiksi = isFiksi;
@@ -40,5 +42,11 @@ public class Buku {
     }
     public void setIsFiksi(Boolean isFiksi) {
         this.isFiksi = isFiksi;
+    }
+    public void printBuku() {
+        System.out.println("ID = " + getId_buku);
+        System.out.println("Judul = " + getJudul);
+        System.out.println("Penulis = " + getPenulis);
+        System.out.println("Fiksi/Non-fiksi = " + getIsFiksi);
     }
 }
