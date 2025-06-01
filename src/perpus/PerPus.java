@@ -37,7 +37,7 @@ public class PerPus {
     public static void displayDaftarBuku(ArrayList<Buku> daftarBuku) {
         System.out.println("Daftar Buku:");
         for (Buku buku : daftarBuku) {
-            System.out.println("ID: " + buku.getId_buku() + ", Judul: " + buku.getJudul() + ", Penulis: " + buku.getPenulis() + ", Fiksi: " + (buku.getIsFiksi() ? "Ya" : "Tidak"));
+            buku.printBuku();
         }
     }
 }

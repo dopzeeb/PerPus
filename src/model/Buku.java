@@ -44,9 +44,6 @@ public class Buku {
         this.isFiksi = isFiksi;
     }
     public void printBuku() {
-        System.out.println("ID = " + getId_buku);
-        System.out.println("Judul = " + getJudul);
-        System.out.println("Penulis = " + getPenulis);
-        System.out.println("Fiksi/Non-fiksi = " + getIsFiksi);
+        System.out.println("ID: " + getId_buku() + ", Judul: " + getJudul() + ", Penulis: " + getPenulis() + ", Fiksi: " + (getIsFiksi() ? "Ya" : "Tidak"));
     }
 }
