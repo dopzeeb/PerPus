@@ -9,7 +9,6 @@ public class Buku {
     public Buku() {
         this.judul = "";
         this.penulis = "";
-
         this.isFiksi = false;
     }
     
