@@ -1,9 +1,14 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.user;
+import model.librarian;
+import model.visitor;
 
 public class MysqlUserService {
     private Connection koneksi;
@@ -12,27 +17,25 @@ public class MysqlUserService {
         this.koneksi = util.MysqlUtilities.getConnection();
     }
 
-
     public user createVisitor() {
-        return new model.visitor();
+        return new visitor();
     }
 
     public user createLibrarian() {
-        return new model.librarian();
+        return new librarian();
     }
 
     public ArrayList<user> getAllUsers() {
         ArrayList<user> users = new ArrayList<>();
-        // Implement logic to retrieve all users from the database
-        String sql = "SELECT * FROM user"; // Adjust the SQL query as needed
+        String sql = "SELECT * FROM user";
         try {
             var statement = koneksi.createStatement();
             var resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Boolean isLibrarian = resultSet.getBoolean("tipe");
+                String tipe = resultSet.getString("tipe");
                 user u;
-                if (isLibrarian) {
-                    u = new model.librarian(
+                if ("librarian".equals(tipe)) {
+                    u = new librarian(
                         resultSet.getInt("id_user"),
                         resultSet.getString("nama"),
                         resultSet.getString("alamat"),
@@ -40,7 +43,7 @@ public class MysqlUserService {
                         resultSet.getString("IDPetugas")
                     );
                 } else {
-                    u = new model.visitor(
+                    u = new visitor(
                         resultSet.getInt("id_user"),
                         resultSet.getString("nama"),
                         resultSet.getString("alamat"),
@@ -57,21 +60,21 @@ public class MysqlUserService {
     }
 
     public void addUser(user u) {
-        // Implement logic to add a user to the database
         String sql = "INSERT INTO user (nama, alamat, noTelp, tipe, IDPetugas, MemberID) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             var preparedStatement = koneksi.prepareStatement(sql);
             preparedStatement.setString(1, u.getNama());
             preparedStatement.setString(2, u.getAlamat());
             preparedStatement.setString(3, u.getNoTelp());
-            if (u instanceof model.librarian) {
-                preparedStatement.setBoolean(4, true);
-                preparedStatement.setString(5, ((model.librarian) u).getIDPetugas());
-                preparedStatement.setNull(6, java.sql.Types.VARCHAR); // No MemberID for librarian
+
+            if (u instanceof librarian) {
+                preparedStatement.setString(4, "librarian");
+                preparedStatement.setString(5, ((librarian) u).getIDPetugas());
+                preparedStatement.setNull(6, java.sql.Types.VARCHAR);
             } else {
-                preparedStatement.setBoolean(4, false);
-                preparedStatement.setNull(5, java.sql.Types.VARCHAR); // No IDPetugas for visitor
-                preparedStatement.setString(6, ((model.visitor) u).getMemberID());
+                preparedStatement.setString(4, "visitor");
+                preparedStatement.setNull(5, java.sql.Types.VARCHAR);
+                preparedStatement.setString(6, ((visitor) u).getMemberID());
             }
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -80,22 +83,23 @@ public class MysqlUserService {
     }
 
     public void updateUser(user u) {
-        // Implement logic to update a user in the database
         String sql = "UPDATE user SET nama = ?, alamat = ?, noTelp = ?, tipe = ?, IDPetugas = ?, MemberID = ? WHERE id_user = ?";
         try {
             var preparedStatement = koneksi.prepareStatement(sql);
             preparedStatement.setString(1, u.getNama());
             preparedStatement.setString(2, u.getAlamat());
             preparedStatement.setString(3, u.getNoTelp());
-            if (u instanceof model.librarian) {
-                preparedStatement.setBoolean(4, true);
-                preparedStatement.setString(5, ((model.librarian) u).getIDPetugas());
-                preparedStatement.setNull(6, java.sql.Types.VARCHAR); // No MemberID for librarian
+
+            if (u instanceof librarian) {
+                preparedStatement.setString(4, "librarian");
+                preparedStatement.setString(5, ((librarian) u).getIDPetugas());
+                preparedStatement.setNull(6, java.sql.Types.VARCHAR);
             } else {
-                preparedStatement.setBoolean(4, false);
-                preparedStatement.setNull(5, java.sql.Types.VARCHAR); // No IDPetugas for visitor
-                preparedStatement.setString(6, ((model.visitor) u).getMemberID());
+                preparedStatement.setString(4, "visitor");
+                preparedStatement.setNull(5, java.sql.Types.VARCHAR);
+                preparedStatement.setString(6, ((visitor) u).getMemberID());
             }
+
             preparedStatement.setInt(7, u.getId());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -104,7 +108,6 @@ public class MysqlUserService {
     }
 
     public void deleteUser(user u) {
-        // Implement logic to delete a user from the database
         String sql = "DELETE FROM user WHERE id_user = ?";
         try {
             var preparedStatement = koneksi.prepareStatement(sql);
@@ -115,38 +118,34 @@ public class MysqlUserService {
         }
     }
 
-
-
-    public user getUserById(int id) {
-        user u = null;
+    public user getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM user WHERE id_user = ?";
-        try {
-            var preparedStatement = koneksi.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            var resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                Boolean isLibrarian = resultSet.getBoolean("tipe");
-                if (isLibrarian) {
-                    u = new model.librarian(
-                        resultSet.getInt("id_user"),
-                        resultSet.getString("nama"),
-                        resultSet.getString("alamat"),
-                        resultSet.getString("noTelp"),
-                        resultSet.getString("IDPetugas")
-                    );
-                } else {
-                    u = new model.visitor(
-                        resultSet.getInt("id_user"),
-                        resultSet.getString("nama"),
-                        resultSet.getString("alamat"),
-                        resultSet.getString("noTelp"),
-                        resultSet.getString("MemberID")
-                    );
-                }
+        PreparedStatement stmt = koneksi.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            String tipe = rs.getString("tipe");
+
+            if ("librarian".equals(tipe)) {
+                return new librarian(
+                    rs.getInt("id_user"),
+                    rs.getString("nama"),
+                    rs.getString("alamat"),
+                    rs.getString("noTelp"),
+                    rs.getString("IDPetugas")
+                );
+            } else {
+                return new visitor(
+                    rs.getInt("id_user"),
+                    rs.getString("nama"),
+                    rs.getString("alamat"),
+                    rs.getString("noTelp"),
+                    rs.getString("MemberID")
+                );
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return u;       
+
+        return null;
     }
 }

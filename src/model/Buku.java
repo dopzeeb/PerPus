@@ -13,37 +13,47 @@ public class Buku {
         this.isFiksi = false;
     }
     
-    public Buku(String judul, Integer id_buku, String penulis,Boolean isFiksi) {
+    public Buku(String judul, Integer id_buku, String penulis, Boolean isFiksi) {
         this.id_buku = id_buku;
         this.judul = judul;
         this.penulis = penulis;
         this.isFiksi = isFiksi;
     }
+    
     public String getJudul() {
         return judul;
     }
+    
     public void setJudul(String judul) {
         this.judul = judul;
     }
+    
     public Integer getId_buku() {
         return id_buku;
     }
+    
     public void setId_buku(Integer id_buku) {
         this.id_buku = id_buku;
     }
+    
     public String getPenulis() {
         return penulis;
     }
+    
     public void setPenulis(String penulis) {
         this.penulis = penulis;
     }
-    public Boolean getIsFiksi() {
+    
+    // Revisi: ubah getter ini jadi isFiksi() sesuai konvensi boolean getter
+    public Boolean isFiksi() {
         return isFiksi;
     }
+    
     public void setIsFiksi(Boolean isFiksi) {
         this.isFiksi = isFiksi;
     }
+    
     public void printBuku() {
-        System.out.println("ID: " + getId_buku() + ", Judul: " + getJudul() + ", Penulis: " + getPenulis() + ", Fiksi: " + (getIsFiksi() ? "Ya" : "Tidak"));
+        System.out.println("ID: " + getId_buku() + ", Judul: " + getJudul() + ", Penulis: " + getPenulis() + ", Fiksi: " + (isFiksi() ? "Ya" : "Tidak"));
     }
 }
