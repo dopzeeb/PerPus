@@ -114,8 +114,18 @@ public class JRock extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableBuku);
 
         jButton_Add.setText("Tambah");
+        jButton_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AddActionPerformed(evt);
+            }
+        });
 
         jButton_Remove.setText("Hapus");
+        jButton_Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RemoveActionPerformed(evt);
+            }
+        });
 
         jButton_Edit.setText("Edit");
 
@@ -247,6 +257,121 @@ public class JRock extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_PenulisActionPerformed
 
+    private void jButton_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddActionPerformed
+        // TODO add your handling code here:
+        try {
+            String judul = jTextField_Judul.getText();
+            String penulis = jTextField_Penulis.getText();
+            String selectedFiksi = jComboBox_Fiksi.getSelectedItem().toString();
+
+            if ((judul.isEmpty() || judul.equals("Nama Buku")) &&
+                (penulis.isEmpty() || penulis.equals("Penulis"))) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Judul dan Penulis tidak boleh kosong!", 
+                    "error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            model.Buku bukuBaru = bukuService.createBuku();
+            bukuBaru.setJudul(judul);
+            bukuBaru.setPenulis(penulis);
+            bukuBaru.setIsFiksi(selectedFiksi.equals("Fiksi"));
+            bukuService.addBuku(bukuBaru);
+
+            loadDataToTable();
+            clearForm();
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Buku berhasil ditambahkan!", 
+                "Success", 
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error menambahkan buku: " + e.getMessage(), 
+            "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+
+    }//GEN-LAST:event_jButton_AddActionPerformed
+
+    private void clearForm() {
+        jTextField_Judul.setText("Nama Buku");
+        jTextField_Penulis.setText("Penulis");
+        jTextField_Status.setText("Status");
+        jTextField_Peminjam.setText("Peminjam");
+        jComboBox_Fiksi.setSelectedIndex(0);
+    }
+    private void jButton_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoveActionPerformed
+        // TODO add your handling code here:
+            try {
+        // Cek apakah ada baris yang dipilih
+        int selectedRow = jTableBuku.getSelectedRow();
+        
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Pilih buku yang akan dihapus terlebih dahulu!", 
+                "Peringatan", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Ambil data dari baris yang dipilih
+        DefaultTableModel model = (DefaultTableModel) jTableBuku.getModel();
+        int idBuku = (Integer) model.getValueAt(selectedRow, 0);
+        String judulBuku = (String) model.getValueAt(selectedRow, 1);
+        String ketersediaan = (String) model.getValueAt(selectedRow, 3);
+        
+        // Cek apakah buku sedang dipinjam
+        if ("Dipinjam".equals(ketersediaan)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Buku sedang dipinjam dan tidak dapat dihapus!", 
+                "Peringatan", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Konfirmasi penghapusan
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
+            "Apakah Anda yakin ingin menghapus buku:\n\"" + judulBuku + "\"?", 
+            "Konfirmasi Hapus", 
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.QUESTION_MESSAGE);
+        
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        // Buat objek Buku untuk dihapus
+        model.Buku bukuToDelete = bukuService.createBuku();
+        bukuToDelete.setId_buku(idBuku);
+        
+        // Hapus dari database
+        bukuService.deleteBuku(bukuToDelete);
+        
+        // Refresh tabel
+        loadDataToTable();
+        
+        // Reset form
+        clearForm();
+        
+        // Tampilkan pesan sukses
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Buku \"" + judulBuku + "\" berhasil dihapus!", 
+            "Success", 
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error menghapus buku: " + e.getMessage(), 
+            "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_jButton_RemoveActionPerformed
+    
+    
     /**
      * @param args the command line arguments
      */
