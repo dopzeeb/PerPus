@@ -25,7 +25,7 @@ public class MysqlUtilities {
                 String url = "jdbc:mysql://localhost:3306/pbo_proyek";
                 // sesuaikan username dan password
                 String user = "root";
-                String password = "123";
+                String password = "";
                 koneksi = DriverManager.getConnection(url, user, password);
                 if (koneksi != null) {
                     System.out.println("Koneksi berhasil");
