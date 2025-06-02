@@ -421,16 +421,16 @@ public class JRock extends javax.swing.JFrame {
         int idUser = Integer.parseInt(peminjamStr);
 
         
+        
         peminjamanService.pinjamBuku(idBuku, idUser);
 
-        // Update status di tabel swing
-        jTableBuku.setValueAt("Dipinjam", selectedRow, 3);
-        jTableBuku.setValueAt(peminjamStr, selectedRow, 4);
+        // Update status buku di tabel
+        loadDataToTable();
+        jTextField_Peminjam.setText("");
 
         javax.swing.JOptionPane.showMessageDialog(this, "Buku berhasil dipinjam!", "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
 
-        // Clear input peminjam
-        jTextField_Peminjam.setText("");
 
         // Jika ada method refresh tabel peminjaman, panggil di sini (misal refreshPeminjamanTable())
         // refreshPeminjamanTable();
