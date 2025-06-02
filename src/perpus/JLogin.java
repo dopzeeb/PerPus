@@ -31,6 +31,7 @@ public class JLogin extends javax.swing.JFrame {
         jPasswordField_Pass = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton_Loginkan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,6 +41,13 @@ public class JLogin extends javax.swing.JFrame {
         jLabel2.setText("Username   :");
 
         jLabel3.setText("Password    :");
+
+        jButton_Loginkan.setText("Login");
+        jButton_Loginkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_LoginkanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,7 +64,8 @@ public class JLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPasswordField_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField_Username, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_Loginkan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -72,12 +81,40 @@ public class JLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jPasswordField_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jButton_Loginkan)
+                .addContainerGap(139, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton_LoginkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LoginkanActionPerformed
+        // TODO add your handling code here:
+        String username = jTextField_Username.getText();
+        String password = new String(jPasswordField_Pass.getPassword());
+
+        // Validasi
+        if (username.equals("Helmi") && password.equals("12345678")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Login Berhasil!");
+            JRock MainFrame = new JRock();
+            MainFrame.setVisible(true);
+
+            this.dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+            "Username atau password salah!", 
+            "Login Gagal", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+
+            jTextField_Username.setText("");
+            jPasswordField_Pass.setText("");
+            jTextField_Username.requestFocus();
+
+        }
+    }//GEN-LAST:event_jButton_LoginkanActionPerformed
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -114,6 +151,7 @@ public class JLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_Loginkan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
