@@ -125,4 +125,28 @@ public class MysqlBukuService {
         
         return new DefaultTableModel(data, columnNames);
     }
+
+    public void KembalikanBuku(int idBuku, int idUser) {
+        String sql = "UPDATE peminjaman SET tanggalkembali = NOW() WHERE id_buku = ? AND id_user = ? AND tanggalkembali IS NULL";
+        try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+            ps.setInt(1, idBuku);
+            ps.setInt(2, idUser);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+    }
+
+    public void pinjamBuku(int idBuku, int idUser) {
+        String sql = "INSERT INTO peminjaman (id_buku, id_user, tanggalpinjam) VALUES (?, ?, NOW())";
+        try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
+            ps.setInt(1, idBuku);
+            ps.setInt(2, idUser);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
