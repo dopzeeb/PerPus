@@ -6,6 +6,7 @@ package perpus;
 
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author Jati
@@ -13,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 public class JRock extends javax.swing.JFrame {
 
     private service.MysqlBukuService bukuService = new service.MysqlBukuService();
-    
+    private service.MysqlPeminjamanService peminjamanService = new service.MysqlPeminjamanService();
     /**
      * Creates new form JRock
      */
@@ -388,58 +389,51 @@ public class JRock extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_NewVisitorActionPerformed
 
     private void jButton_PeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_PeminjamActionPerformed
-        jButton_Peminjam.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent e) {
         int selectedRow = jTableBuku.getSelectedRow();
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(null, "Silakan pilih buku yang ingin dipinjam.");
-            return;
-        }
-
-        String idUserStr = jTextField_Peminjam.getText().trim();
-        if (idUserStr.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Masukkan ID peminjam.");
-            return;
-        }
-
-        try {
-            int idUser = Integer.parseInt(idUserStr);
-            int idBuku = Integer.parseInt(jTableBuku.getValueAt(selectedRow, 0).toString());
-
-            Connection conn = jdbc:mysql://localhost:3306/pbo_proyek;
-            PreparedStatement psCheck = conn.prepareStatement("SELECT status FROM buku WHERE id_buku = ?");
-            psCheck.setInt(1, idBuku);
-            ResultSet rs = psCheck.executeQuery();
-            if (rs.next() && "Dipinjam".equalsIgnoreCase(rs.getString("status"))) {
-                JOptionPane.showMessageDialog(null, "Buku sudah dipinjam.");
-                return;
-            }
-
-            // Insert ke tabel peminjaman
-            PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO peminjaman (tanggalPinjam, id_buku, id_user) VALUES (?, ?, ?)");
-            ps.setDate(1, new java.sql.Date(System.currentTimeMillis()));
-            ps.setInt(2, idBuku);
-            ps.setInt(3, idUser);
-            ps.executeUpdate();
-
-            // Update status buku
-            PreparedStatement psUpdate = conn.prepareStatement("UPDATE buku SET status = 'Dipinjam' WHERE id_buku = ?");
-            psUpdate.setInt(1, idBuku);
-            psUpdate.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Peminjaman berhasil.");
-            // Refresh tabel jika perlu
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "ID peminjam harus berupa angka.");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat meminjam buku.");
-        }
+    if (selectedRow == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Pilih buku yang ingin dipinjam dulu!", "Peringatan", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
     }
-});
-        // TODO add your handling code here:
+
+    String idBukuStr = jTableBuku.getValueAt(selectedRow, 0).toString();
+    String ketersediaan = jTableBuku.getValueAt(selectedRow, 3).toString();
+
+    if (!ketersediaan.equalsIgnoreCase("Tersedia")) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Buku ini sedang tidak tersedia untuk dipinjam.", "Info", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    String peminjamStr = jTextField_Peminjam.getText().trim();
+    if (peminjamStr.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Masukkan ID peminjam (user)!", "Peringatan", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        int idBuku = Integer.parseInt(idBukuStr);
+        int idUser = Integer.parseInt(peminjamStr);
+
+        
+        peminjamanService.pinjamBuku(idBuku, idUser);
+
+        // Update status di tabel swing
+        jTableBuku.setValueAt("Dipinjam", selectedRow, 3);
+        jTableBuku.setValueAt(peminjamStr, selectedRow, 4);
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Buku berhasil dipinjam!", "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        // Clear input peminjam
+        jTextField_Peminjam.setText("");
+
+        // Jika ada method refresh tabel peminjaman, panggil di sini (misal refreshPeminjamanTable())
+        // refreshPeminjamanTable();
+
+    } catch (NumberFormatException nfe) {
+        javax.swing.JOptionPane.showMessageDialog(this, "ID buku dan ID peminjam harus berupa angka!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    } catch (Exception ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memproses peminjaman: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+        // T  ODO add your handling code here:
     }//GEN-LAST:event_jButton_PeminjamActionPerformed
     
     
