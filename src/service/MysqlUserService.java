@@ -74,7 +74,7 @@ public class MysqlUserService {
             } else {
                 preparedStatement.setString(4, "visitor");
                 preparedStatement.setNull(5, java.sql.Types.VARCHAR);
-                preparedStatement.setString(6, ((visitor) u).getMemberID());
+                preparedStatement.setNull(6, java.sql.Types.VARCHAR);
             }
             preparedStatement.executeUpdate();
         } catch (Exception e) {
