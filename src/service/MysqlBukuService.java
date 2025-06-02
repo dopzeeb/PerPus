@@ -2,6 +2,10 @@ package service;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 import model.Buku;
 
 public class MysqlBukuService {
@@ -91,5 +95,34 @@ public class MysqlBukuService {
             e.printStackTrace();
         }
         return listBuku;
+    }
+
+    public DefaultTableModel getBukuTableModel() {
+        String[] columnNames = {
+                "Id Buku", "Judul Buku", "Penulis", "Ketersediaan", "Peminjam"};
+        ArrayList<Object[]> rowData = new ArrayList<>();
+        String sql = "SELECT b.id_buku, b.judul, b.penulis, " +
+                 "CASE WHEN p.id_buku IS NULL THEN 'Tersedia' ELSE 'Dipinjam' END AS ketersediaan, " +
+                 "m.nama AS peminjam " +
+                 "FROM buku b " +
+                 "LEFT JOIN peminjaman p ON b.id_buku = p.id_buku AND p.tanggalkembali IS NULL " +
+                 "LEFT JOIN user m ON p.id_user = m.id_user";
+        try (Statement stmt = koneksi.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Object[] row = new Object[5];
+                row[0] = rs.getInt("id_buku");
+                row[1] = rs.getString("judul");
+                row[2] = rs.getString("penulis");
+                row[3] = rs.getString("ketersediaan");
+                row[4] = rs.getString("peminjam");
+                rowData.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Object[][] data = rowData.toArray(new Object[0][]);
+        
+        return new DefaultTableModel(data, columnNames);
     }
 }

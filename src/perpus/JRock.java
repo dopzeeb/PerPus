@@ -4,18 +4,24 @@
  */
 package perpus;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jati
  */
 public class JRock extends javax.swing.JFrame {
 
+    private service.MysqlBukuService bukuService = new service.MysqlBukuService();
+    
     /**
      * Creates new form JRock
      */
     public JRock() {
         initComponents();
+        loadDataToTable(); 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -274,6 +280,24 @@ public class JRock extends javax.swing.JFrame {
                 new JRock().setVisible(true);
             }
         });
+    }
+
+        // Tambahkan method untuk load data ke tabel
+    private void loadDataToTable() {
+        try {
+            // Ambil DefaultTableModel dari database menggunakan service
+            DefaultTableModel model = bukuService.getBukuTableModel();
+            
+            // Set model ke jTableBuku
+            jTableBuku.setModel(model);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Error loading data: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
