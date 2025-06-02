@@ -17,6 +17,9 @@ public class JFrame_AddVisitor extends javax.swing.JFrame {
         initComponents();
     }
 
+    service.MysqlUserService userService = new service.MysqlUserService();
+    model.user visitor = userService.createVisitor();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,21 +29,115 @@ public class JFrame_AddVisitor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField_alamat = new javax.swing.JTextField();
+        jTextField_nama1 = new javax.swing.JTextField();
+        jTextField_noHP = new javax.swing.JTextField();
+        jButton_submit = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Nama      :");
+
+        jLabel2.setText("Alamat    :");
+
+        jLabel3.setText("NoHP      :");
+
+        jTextField_alamat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_alamatActionPerformed(evt);
+            }
+        });
+
+        jTextField_noHP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_noHPActionPerformed(evt);
+            }
+        });
+
+        jButton_submit.setText("Submit");
+        jButton_submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_submitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField_noHP, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jButton_submit)))
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(129, Short.MAX_VALUE)
+                    .addComponent(jTextField_nama1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(83, 83, 83)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextField_noHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(jButton_submit)
+                .addContainerGap(81, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(58, 58, 58)
+                    .addComponent(jTextField_nama1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(220, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField_alamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_alamatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_alamatActionPerformed
+
+    private void jTextField_noHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_noHPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_noHPActionPerformed
+
+    private void jButton_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_submitActionPerformed
+        // TODO add your handling code here:
+        visitor.setNama(jTextField_nama1.getText());
+        visitor.setAlamat(jTextField_alamat.getText());
+        visitor.setNoTelp(jTextField_noHP.getText());
+        userService.addUser(visitor);
+        javax.swing.JOptionPane.showMessageDialog(this, "Visitor added successfully!");
+        dispose(); // Close the form after submission
+        // Optionally, you can clear the fields after submission
+        jTextField_nama1.setText("");
+        jTextField_alamat.setText("");
+        jTextField_noHP.setText("");
+        
+    }//GEN-LAST:event_jButton_submitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +175,12 @@ public class JFrame_AddVisitor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton_submit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField jTextField_alamat;
+    private javax.swing.JTextField jTextField_nama1;
+    private javax.swing.JTextField jTextField_noHP;
     // End of variables declaration//GEN-END:variables
 }

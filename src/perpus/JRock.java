@@ -163,6 +163,11 @@ public class JRock extends javax.swing.JFrame {
         jLabel_Admin.setText("Helmi Love Balls");
 
         jButton_NewVisitor.setText("Visitor Baru");
+        jButton_NewVisitor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_NewVisitorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -370,6 +375,16 @@ public class JRock extends javax.swing.JFrame {
             javax.swing.JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_jButton_RemoveActionPerformed
+
+    private void jButton_NewVisitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NewVisitorActionPerformed
+        // TODO add your handling code here:
+        // Buka dialog untuk menambahkan visitor baru
+        JFrame_AddVisitor addVisitorFrame = new JFrame_AddVisitor();
+        addVisitorFrame.setVisible(true);
+        addVisitorFrame.setLocationRelativeTo(this); // Center dialog on parent frame
+        addVisitorFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+    }//GEN-LAST:event_jButton_NewVisitorActionPerformed
     
     
     /**
