@@ -129,15 +129,10 @@ public class JRock extends javax.swing.JFrame {
 
         jButton_Edit.setText("Edit");
 
-        jTextField_Judul.setText("Nama Buku");
-
-        jTextField_Status.setText("Status");
-
         jLabel1.setText("Judul Buku :");
 
         jLabel2.setText("Status        :");
 
-        jTextField_Penulis.setText("Penulis");
         jTextField_Penulis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField_PenulisActionPerformed(evt);
@@ -149,8 +144,6 @@ public class JRock extends javax.swing.JFrame {
         jComboBox_Fiksi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiksi", "Non-Fiksi" }));
 
         jLabel4.setText("Nadip    :");
-
-        jTextField_Peminjam.setText("Peminjam");
 
         jLabel5.setText("Peminjam :");
 
@@ -369,6 +362,9 @@ public class JRock extends javax.swing.JFrame {
             "Error", 
             javax.swing.JOptionPane.ERROR_MESSAGE);
     }
+
+    
+
     }//GEN-LAST:event_jButton_RemoveActionPerformed
     
     

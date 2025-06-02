@@ -223,14 +223,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_Judul">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nama Buku"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_Status">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Status"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -243,9 +237,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_Penulis">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Penulis"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField_PenulisActionPerformed"/>
       </Events>
@@ -274,9 +265,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField_Peminjam">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Peminjam"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
