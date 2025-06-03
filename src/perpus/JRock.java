@@ -467,7 +467,9 @@ public class JRock extends javax.swing.JFrame {
         try {
             int idBuku = Integer.parseInt(idBukuStr);
             peminjamanService.kembalikanBuku(idBuku);
-
+            // Reset field peminjam
+            jTextField_Peminjam.setText("");
+            
             // Update status buku di tabel
             loadDataToTable();
 

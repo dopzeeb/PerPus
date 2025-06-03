@@ -32,13 +32,12 @@ public class MysqlPeminjamanService {
         }
     }
 
-    public void kembalikanBuku(Integer idBuku, Integer idUser) {
+    public void kembalikanBuku(Integer idBuku) {
         // Implementasi logika pengembalian buku
         // Misalnya, update tanggal pengembalian di tabel peminjaman
-        String sql = "UPDATE peminjaman SET tanggalKembali = NOW() WHERE id_buku = ? AND id_user = ?";
+        String sql = "UPDATE peminjaman SET tanggalKembali = NOW() WHERE id_buku = ?";
         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
             ps.setInt(1, idBuku);
-            ps.setInt(2, idUser);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
