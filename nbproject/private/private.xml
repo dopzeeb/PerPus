@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/LENOVO/PerPus/src/model/Buku.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/service/MysqlUserService.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/perpus/JRock.java</file>
@@ -16,6 +17,13 @@
             <file>file:/C:/Users/LENOVO/PerPus/src/perpus/JFrame_AddVisitor.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/service/MysqlBukuService.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/model/visitor.java</file>
+=======
+            <file>file:/D:/kuliah/Kuliah_4/pbo%20p=tubes/PerPus/src/util/MysqlUtilities.java</file>
+            <file>file:/D:/kuliah/Kuliah_4/pbo%20p=tubes/PerPus/src/perpus/JRock.java</file>
+            <file>file:/D:/kuliah/Kuliah_4/pbo%20p=tubes/PerPus/src/service/MysqlBukuService.java</file>
+            <file>file:/D:/kuliah/Kuliah_4/pbo%20p=tubes/PerPus/src/perpus/JFrame_AddVisitor.java</file>
+            <file>file:/D:/kuliah/Kuliah_4/pbo%20p=tubes/PerPus/src/service/MysqlPeminjamanService.java</file>
+>>>>>>> 32d621b8bfe5b28b3c51972f12fc3958b9879223
         </group>
     </open-files>
 </project-private>

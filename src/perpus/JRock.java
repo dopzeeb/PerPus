@@ -107,9 +107,16 @@ public class JRock extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTableBuku);
@@ -156,6 +163,11 @@ public class JRock extends javax.swing.JFrame {
         });
 
         jButton_Kembalikan.setText("Kembalikan");
+        jButton_Kembalikan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_KembalikanActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Nama Admin :");
 
@@ -414,16 +426,17 @@ public class JRock extends javax.swing.JFrame {
         int idUser = Integer.parseInt(peminjamStr);
 
         
+        
         peminjamanService.pinjamBuku(idBuku, idUser);
 
-        // Update status di tabel swing
-        jTableBuku.setValueAt("Dipinjam", selectedRow, 3);
-        jTableBuku.setValueAt(peminjamStr, selectedRow, 4);
+        // Update status buku di tabel
+        loadDataToTable();
+        jTextField_Peminjam.setText("");
 
         javax.swing.JOptionPane.showMessageDialog(this, "Buku berhasil dipinjam!", "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
 
-        // Clear input peminjam
-        jTextField_Peminjam.setText("");
+///ndwaiodjawiodjawiodjwaiodj
 
         // Jika ada method refresh tabel peminjaman, panggil di sini (misal refreshPeminjamanTable())
         // refreshPeminjamanTable();
@@ -435,7 +448,41 @@ public class JRock extends javax.swing.JFrame {
     }
         // T  ODO add your handling code here:
     }//GEN-LAST:event_jButton_PeminjamActionPerformed
-    
+
+    private void jButton_KembalikanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KembalikanActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = jTableBuku.getSelectedRow();
+        if (selectedRow == -1) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Pilih buku yang ingin dikembalikan!", "Peringatan", javax.swing.JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String idBukuStr = jTableBuku.getValueAt(selectedRow, 0).toString();
+        String ketersediaan = jTableBuku.getValueAt(selectedRow, 3).toString();
+
+        if (!ketersediaan.equalsIgnoreCase("Dipinjam")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Buku ini tidak sedang dipinjam.", "Info", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        try {
+            int idBuku = Integer.parseInt(idBukuStr);
+            peminjamanService.kembalikanBuku(idBuku);
+            // Reset field peminjam
+            jTextField_Peminjam.setText("");
+            
+            // Update status buku di tabel
+            loadDataToTable();
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Buku berhasil dikembalikan!", "Sukses", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException nfe) {
+            javax.swing.JOptionPane.showMessageDialog(this, "ID buku harus berupa angka!", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat memproses pengembalian: " + ex.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton_KembalikanActionPerformed
+
     
     /**
      * @param args the command line arguments

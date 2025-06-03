@@ -19,23 +19,25 @@ public class MysqlPeminjamanService {
     public void pinjamBuku(Integer idBuku, Integer idUser) {
         // Implementasi logika peminjaman buku
         // Misalnya, insert ke tabel peminjaman
-        String sql = "INSERT INTO peminjaman (id_buku, id_user, tanggal_pinjam) VALUES (?, ?, NOW())";
+        String sql = "INSERT INTO peminjaman (id_buku, id_user, tanggalPinjam) VALUES (?, ?, NOW())";
         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
             ps.setInt(1, idBuku);
             ps.setInt(2, idUser);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            // Handle exception
+            throw new RuntimeException("Gagal meminjam buku karena user tidak ada", e);
+            // javax.swing.JOptionPane.showMessageDialog(null, "Gagal meminjam buku karena user tidak ada" );
         }
     }
 
-    public void kembalikanBuku(Integer idBuku, Integer idUser) {
+    public void kembalikanBuku(Integer idBuku) {
         // Implementasi logika pengembalian buku
         // Misalnya, update tanggal pengembalian di tabel peminjaman
-        String sql = "UPDATE peminjaman SET tanggal_kembali = NOW() WHERE id_buku = ? AND id_user = ?";
+        String sql = "UPDATE peminjaman SET tanggalKembali = NOW() WHERE id_buku = ?";
         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
             ps.setInt(1, idBuku);
-            ps.setInt(2, idUser);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
