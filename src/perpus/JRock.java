@@ -37,15 +37,13 @@ public class JRock extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jDialog1 = new javax.swing.JDialog();
         jFrame1 = new javax.swing.JFrame();
+        jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableBuku = new javax.swing.JTable();
         jButton_Add = new javax.swing.JButton();
         jButton_Remove = new javax.swing.JButton();
-        jButton_Edit = new javax.swing.JButton();
         jTextField_Judul = new javax.swing.JTextField();
-        jTextField_Status = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jTextField_Penulis = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jComboBox_Fiksi = new javax.swing.JComboBox<>();
@@ -57,6 +55,8 @@ public class JRock extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel_Admin = new javax.swing.JLabel();
         jButton_NewVisitor = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -91,6 +91,9 @@ public class JRock extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel8.setText("SeLaMat DaTAngG dI pErPusTAkAn KamI");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTableBuku.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,6 +124,7 @@ public class JRock extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableBuku);
 
+        jButton_Add.setBackground(new java.awt.Color(102, 153, 255));
         jButton_Add.setText("Tambah");
         jButton_Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +132,7 @@ public class JRock extends javax.swing.JFrame {
             }
         });
 
+        jButton_Remove.setBackground(new java.awt.Color(255, 102, 102));
         jButton_Remove.setText("Hapus");
         jButton_Remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,11 +140,7 @@ public class JRock extends javax.swing.JFrame {
             }
         });
 
-        jButton_Edit.setText("Edit");
-
         jLabel1.setText("Judul Buku :");
-
-        jLabel2.setText("Status        :");
 
         jTextField_Penulis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,10 +152,11 @@ public class JRock extends javax.swing.JFrame {
 
         jComboBox_Fiksi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiksi", "Non-Fiksi" }));
 
-        jLabel4.setText("Nadip    :");
+        jLabel4.setText("Fiksi/Non :");
 
         jLabel5.setText("Peminjam :");
 
+        jButton_Peminjam.setBackground(new java.awt.Color(102, 255, 102));
         jButton_Peminjam.setText("Pinjamkan");
         jButton_Peminjam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +164,7 @@ public class JRock extends javax.swing.JFrame {
             }
         });
 
+        jButton_Kembalikan.setBackground(new java.awt.Color(255, 255, 51));
         jButton_Kembalikan.setText("Kembalikan");
         jButton_Kembalikan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +174,7 @@ public class JRock extends javax.swing.JFrame {
 
         jLabel6.setText("Nama Admin :");
 
-        jLabel_Admin.setText("Helmi Love Balls");
+        jLabel_Admin.setText("Helmi");
 
         jButton_NewVisitor.setText("Visitor Baru");
         jButton_NewVisitor.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +183,12 @@ public class JRock extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Tambahkan Pengunjung Baru");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("MyPerpusku");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,79 +196,82 @@ public class JRock extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel_Admin))
+                                .addComponent(jLabel_Admin)
+                                .addGap(0, 842, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton_Add)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(jButton_Remove)
-                                        .addGap(48, 48, 48)
-                                        .addComponent(jButton_Edit))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField_Status, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(33, 33, 33)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel3))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField_Penulis)
-                                    .addComponent(jComboBox_Fiksi, 0, 110, Short.MAX_VALUE))
-                                .addGap(28, 28, 28)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField_Peminjam, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton_Add)
+                                .addGap(43, 43, 43)
+                                .addComponent(jButton_Remove)
+                                .addGap(120, 120, 120))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton_NewVisitor)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton_Peminjam)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton_Kembalikan)))))
-                        .addGap(0, 90, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField_Penulis)
+                            .addComponent(jComboBox_Fiksi, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField_Peminjam, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton_Peminjam)
+                                .addGap(36, 36, 36)
+                                .addComponent(jButton_Kembalikan))
+                            .addComponent(jButton_NewVisitor)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(100, 100, 100))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(430, 430, 430)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_Judul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField_Penulis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField_Peminjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton_Peminjam)
-                    .addComponent(jButton_Kembalikan))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_Status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
                     .addComponent(jComboBox_Fiksi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jButton_NewVisitor))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_Add)
                     .addComponent(jButton_Remove)
-                    .addComponent(jButton_Edit))
-                .addGap(120, 120, 120)
+                    .addComponent(jButton_Peminjam)
+                    .addComponent(jButton_Kembalikan))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_NewVisitor)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel_Admin))
@@ -313,10 +325,9 @@ public class JRock extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_AddActionPerformed
 
     private void clearForm() {
-        jTextField_Judul.setText("Nama Buku");
-        jTextField_Penulis.setText("Penulis");
-        jTextField_Status.setText("Status");
-        jTextField_Peminjam.setText("Peminjam");
+        jTextField_Judul.setText("");
+        jTextField_Penulis.setText("");
+        jTextField_Peminjam.setText("");
         jComboBox_Fiksi.setSelectedIndex(0);
     }
     private void jButton_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoveActionPerformed
@@ -539,7 +550,6 @@ public class JRock extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Add;
-    private javax.swing.JButton jButton_Edit;
     private javax.swing.JButton jButton_Kembalikan;
     private javax.swing.JButton jButton_NewVisitor;
     private javax.swing.JButton jButton_Peminjam;
@@ -548,11 +558,13 @@ public class JRock extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Admin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -561,6 +573,5 @@ public class JRock extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Judul;
     private javax.swing.JTextField jTextField_Peminjam;
     private javax.swing.JTextField jTextField_Penulis;
-    private javax.swing.JTextField jTextField_Status;
     // End of variables declaration//GEN-END:variables
 }
