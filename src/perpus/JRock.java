@@ -325,9 +325,9 @@ public class JRock extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_AddActionPerformed
 
     private void clearForm() {
-        jTextField_Judul.setText("Nama Buku");
-        jTextField_Penulis.setText("Penulis");
-        jTextField_Peminjam.setText("Peminjam");
+        jTextField_Judul.setText("");
+        jTextField_Penulis.setText("");
+        jTextField_Peminjam.setText("");
         jComboBox_Fiksi.setSelectedIndex(0);
     }
     private void jButton_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RemoveActionPerformed
