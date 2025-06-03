@@ -5,12 +5,17 @@
         <group>
             <file>file:/C:/Users/LENOVO/PerPus/src/model/Buku.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/service/MysqlUserService.java</file>
-            <file>file:/C:/Users/LENOVO/PerPus/src/perpus/PerPus.java</file>
-            <file>file:/C:/Users/LENOVO/PerPus/src/service/MysqlBukuService.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/perpus/JRock.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/model/peminjaman.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/model/librarian.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/model/user.java</file>
-            <file>file:/C:/Users/LENOVO/PerPus/src/model/visitor.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/service/MysqlPeminjamanService.java</file>
             <file>file:/C:/Users/LENOVO/PerPus/src/util/MysqlUtilities.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/perpus/PerPus.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/perpus/JLogin.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/perpus/JFrame_AddVisitor.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/service/MysqlBukuService.java</file>
+            <file>file:/C:/Users/LENOVO/PerPus/src/model/visitor.java</file>
         </group>
     </open-files>
 </project-private>
